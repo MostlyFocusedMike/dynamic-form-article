@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Form = () => {
-    return(
+    return (
         <form>
             <label htmlFor="owner">Owner</label>
             <input type="text" name="owner" id="owner" />
@@ -14,7 +14,7 @@ const Form = () => {
             <input type="button" value="Add New Cat" />
             <input type="submit" value="Submit" />
         </form>
-    )
+    );
 };
 
 export default Form;

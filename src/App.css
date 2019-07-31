@@ -13,3 +13,9 @@ input {
 input[type="button"], input[type="submit"] {
     margin: 1rem auto;
 }
+
+form div {
+    margin: 1rem;
+    padding: 1rem;
+    border: 0.15rem solid #000;
+}

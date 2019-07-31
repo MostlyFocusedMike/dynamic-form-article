@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 
 const Form = () => {
+    const [ownerState, setOwnerState] = useState({
+        owner: '',
+        description: '',
+    });
+
+    const handleOwnerChange = (e) => setOwnerState({
+        ...ownerState,
+        [e.target.name]: [e.target.value],
+    });
+
     const blankCat = { name: '', age: '' };
     const [catState, setCatState] = useState([
         blankCat,
@@ -13,12 +23,20 @@ const Form = () => {
     return (
         <form>
             <label htmlFor="owner">Owner</label>
-            <input type="text" name="owner" id="owner" />
+            <input
+                type="text"
+                name="owner"
+                id="owner"
+                value={ownerState.owner}
+                onChange={handleOwnerChange}
+            />
             <label htmlFor="description">Description</label>
             <input
                 type="text"
                 name="description"
                 id="description"
+                value={ownerState.description}
+                onChange={handleOwnerChange}
             />
             <input
                 type="button"

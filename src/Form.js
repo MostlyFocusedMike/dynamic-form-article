@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CatInputs from './CatInputs';
 
 const Form = () => {
     const [ownerState, setOwnerState] = useState({
@@ -13,11 +14,17 @@ const Form = () => {
 
     const blankCat = { name: '', age: '' };
     const [catState, setCatState] = useState([
-        blankCat,
+        { ...blankCat },
     ]);
 
     const addCat = () => {
-        setCatState([...catState, blankCat]);
+        setCatState([...catState, { ...blankCat }]);
+    };
+
+    const handleCatChange = (e) => {
+        const updatedCats = [...catState];
+        updatedCats[e.target.dataset.idx][e.target.className] = e.target.value;
+        setCatState(updatedCats);
     };
 
     return (
@@ -44,30 +51,14 @@ const Form = () => {
                 onClick={addCat}
             />
             {
-                catState.map((val, idx) => {
-                    const catId = `name-${idx}`;
-                    const ageId = `age-${idx}`;
-                    return (
-                        <div key={`cat-${idx}`}>
-                            <label htmlFor={catId}>{`Cat #${idx + 1}`}</label>
-                            <input
-                                type="text"
-                                name={catId}
-                                data-id={idx}
-                                id={catId}
-                                className="name"
-                            />
-                            <label htmlFor={ageId}>Age</label>
-                            <input
-                                type="text"
-                                name={ageId}
-                                data-id={idx}
-                                id={ageId}
-                                className="age"
-                            />
-                        </div>
-                    );
-                })
+                catState.map((val, idx) => (
+                    <CatInputs
+                        key={`cat-${idx}`}
+                        idx={idx}
+                        catState={catState}
+                        handleCatChange={handleCatChange}
+                    />
+                ))
             }
             <input type="submit" value="Submit" />
         </form>
